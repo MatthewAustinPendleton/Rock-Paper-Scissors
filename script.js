@@ -14,6 +14,27 @@ else {
 }
 console.log("The computer has selected " + computerChoiceString);
 
+let humanChoice = prompt("Please enter a choice for your Rock-Paper-Scissors turn!");
+let humanChoiceString = "";
+
+if (humanChoice != "rock" && humanChoice != "ROCK" && humanChoice != "R" && humanChoice != "r" && 
+    humanChoice != "paper" && humanChoice != "PAPER" && humanChoice != "P" && humanChoice != "p" && 
+    humanChoice != "scissors" && humanChoice != "SCISSORS" && humanChoice != "S" && humanChoice != "s") {
+        console.log("Your input was invalid. Please try again!");
+    }
+else {
+    if (humanChoice == "rock" || humanChoice == "ROCK" || humanChoice == "R" || humanChoice == "r") {
+        humanChoiceString = "rock";
+    }
+    else if (humanChoice == "paper" || humanChoice == "PAPER" || humanChoice == "P" || humanChoice == "p") {
+        humanChoiceString = "paper";
+    }
+    else {
+        humanChoiceString = "scissors";
+    }
+    console.log("Your choice is " + humanChoiceString);
+}
+
 /*
 Pseudo-code for Step 3:
 
