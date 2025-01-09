@@ -1,88 +1,113 @@
-let playerScore = 0;
+let humanScore = 0;
 let computerScore = 0;
-
-let computerChoice = Math.floor(Math.random() * 3); // Generates a number between 0 and 2
+let computerChoice;
 let computerChoiceString = "";
-if (computerChoice == 0) {
-    computerChoiceString = "rock";
-}
-else if (computerChoice == 1) {
-    computerChoiceString = "paper";
-}
-else {
-    computerChoiceString = "scissors";
-}
-console.log("The computer has selected " + computerChoiceString);
-
-let humanChoice = prompt("Please enter a choice for your Rock-Paper-Scissors turn!");
+let humanChoice;
 let humanChoiceString = "";
 
-if (humanChoice != "rock" && humanChoice != "ROCK" && humanChoice != "R" && humanChoice != "r" && 
-    humanChoice != "paper" && humanChoice != "PAPER" && humanChoice != "P" && humanChoice != "p" && 
-    humanChoice != "scissors" && humanChoice != "SCISSORS" && humanChoice != "S" && humanChoice != "s") {
-        console.log("Your input was invalid. Please try again!");
+function computerTurn() {
+    computerChoice = Math.floor(Math.random() * 3);
+    if (computerChoice == 0) {
+        computerChoiceString = "rock";
     }
-else {
-    if (humanChoice == "rock" || humanChoice == "ROCK" || humanChoice == "R" || humanChoice == "r") {
-        humanChoiceString = "rock";
-    }
-    else if (humanChoice == "paper" || humanChoice == "PAPER" || humanChoice == "P" || humanChoice == "p") {
-        humanChoiceString = "paper";
+    else if (computerChoice == 1) {
+        computerChoiceString = "paper";
     }
     else {
-        humanChoiceString = "scissors";
+        computerChoiceString = "scissors";
     }
-    console.log("Your choice is " + humanChoiceString);
+    console.log("The computer has selected " + computerChoiceString);
 }
 
-/*
-Pseudo-code for Step 3:
+function humanTurn() {
+    humanChoice = prompt("Please enter a choice for your Rock-Paper-Scissors turn!");
 
-VAR HumanChoiceChar
-VAR HumanChoice = ""
-while(HumanChoiceChar != "r" || HumanChoiceChar != "p" || HumanChoiceChar != "s")
-    Prompt the user for an input (r=rock, p=paper, s=scissors
-                                rock=rock, paper=paper, scissors=scissors, 
-                                Rock=rock, Paper=paper, Scissors=scissors)
-    if (HumanChoiceChar == "r") HumanChoice = "rock"
-    if (HumanChoiceChar == "p") HumanChoice = "paper"
-    if (HumanChoiceChar == "s") HumanChoice = "scissors"
-    else alert("You need to enter either r, p, or s!")
-
-Pseudo-code for Step 4:
-VAR HumanScore = 0
-VAR ComputerScore = 0
-
-function playRound(humanChoice, computerChoice) {
-    First consolidate everything so that the humanChoice is reduced to standard format: rock, paper, scissors
-    if (humanChoice == rock) {
-        if (computerChoice == rock) TIE, no increment, try again
-        else if (computerChoice == paper) COMPUTER WINS, increment comp score, announce
-        else HUMAN WINS, increment human score, announce
-    }
-    else if(humanChoice == paper) {
-        if (computerChoice == rock) HUMAN WINS, increment human score, announce
-        else if (computerChoice == paper) TIE, no increment, try again
-        else COMPUTER WINS, increment comp score, announce
-    }
-    else {
-        if (computerChoice == rock) COMPUTER WINS, increment comp score, announce
-        else if (computerChoice == paper) HUMAN WINS, increment human score, announce
-        else TIE, no increment, try again
-    }
-}
-
-    function playGame() {
-        Determine how many times to play, in this case, 5 rounds
-        var playerScore = 0
-        var computerScore = 0
-        for (int i = 0; i < 5; i++) {
-            prompt user for a guess
-            generate a guess for computer
-            playRound(humanGuess, computerGuess) (playerScore is incremented if they win, otherwise...)
+    if (humanChoice != "rock" && humanChoice != "ROCK" && humanChoice != "R" && humanChoice != "r" && 
+        humanChoice != "paper" && humanChoice != "PAPER" && humanChoice != "P" && humanChoice != "p" && 
+        humanChoice != "scissors" && humanChoice != "SCISSORS" && humanChoice != "S" && humanChoice != "s") {
+            console.log("Your input was invalid. Please try again!");
+            humanTurn();
         }
-        After five rounds, the scores should be incremented and kept track of
-        Compar human score and computer score and announce winner
+    else {
+        if (humanChoice == "rock" || humanChoice == "ROCK" || humanChoice == "R" || humanChoice == "r") {
+            humanChoiceString = "rock";
+        }
+        else if (humanChoice == "paper" || humanChoice == "PAPER" || humanChoice == "P" || humanChoice == "p") {
+            humanChoiceString = "paper";
+        }
+        else {
+            humanChoiceString = "scissors";
+        }
+        console.log("Your choice is " + humanChoiceString);
     }
+}
 
-*/
+function playRound(humanChoiceString, computerChoiceString) {
+    if (humanChoiceString == "rock") {
+        if (computerChoiceString == "rock") {
+            console.log("You both selected rock and therefore ended up in a tie! No points awarded!");
+        }
+        else if (computerChoiceString == "paper") {
+            computerScore++;
+            console.log("Your rock was defeated by the computer's paper!");
+            console.log("The computer is awarded one point!");
+        }
+        else {
+            humanScore++;
+            console.log("Your rock defeated the computer's scissors!");
+            console.log("You are awarded one point!");
+        } 
+    } // Rock selected
+    else if (humanChoiceString == "paper") {
+        if (computerChoiceString == "rock") {
+            humanScore++;
+            console.log("Your paper defeated the computer's rock!");
+            console.log("You are awarded one point!");
+        }
+        else if (computerChoiceString == "paper") {
+            console.log("You both selected paper and therefore ended up in a tie! No points awarded!");
+        }
+        else {
+            computerScore++;
+            console.log("Your paper was defeated by the computer's scissors!");
+            console.log("The computer is awarded one point!");
+        }
+    } // Paper selected
+    else {
+        if (computerChoiceString == "rock") {
+            computerScore++;
+            console.log("Your scissors were defeated by the computer's rock!");
+            console.log("The computer is awarded one point!");
+        }
+        else if (computerChoiceString == "paper") {
+            humanScore++;
+            console.log("Your scissors defeated the computer's paper!");
+            console.log("You are awarded one point!");
+        }
+        else {
+            console.log("You both selected scissors and therefore ended up in a tie! No points awarded!");
+        }
+    }
+    console.log("The round has ended! The player has " + humanScore + " points; the computer has " + computerScore + " points.");
+}
+
+function playGame() {
+    const numberOfRounds = 5;
+    for (let i = 0; i < numberOfRounds; i++) {
+        humanTurn();
+        computerTurn();
+        playRound(humanChoiceString, computerChoiceString);
+    }
+    if (humanScore > computerScore) {
+        // You win!
+        console.log("You've defeated the computer! Your final score is: " + humanScore);
+    }
+    else if (computerScore > humanScore) {
+        console.log("You've been defeated by the computer! Your final score is: " + humanScore);
+    }
+    else {
+        console.log("You and the computer have ended in a tie! Your final score is: " + humanScore);
+    }
+}
+
+playGame();
