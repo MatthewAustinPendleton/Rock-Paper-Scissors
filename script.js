@@ -91,15 +91,8 @@ function playRound(humanChoiceString, computerChoiceString) {
     console.log("The round has ended! The player has " + humanScore + " points; the computer has " + computerScore + " points.");
 }
 
-function playGame() {
-    const numberOfRounds = 5;
-    for (let i = 0; i < numberOfRounds; i++) {
-        humanTurn();
-        computerTurn();
-        playRound(humanChoiceString, computerChoiceString);
-    }
+function compareScores() {
     if (humanScore > computerScore) {
-        // You win!
         console.log("You've defeated the computer! Your final score is: " + humanScore);
     }
     else if (computerScore > humanScore) {
@@ -108,6 +101,10 @@ function playGame() {
     else {
         console.log("You and the computer have ended in a tie! Your final score is: " + humanScore);
     }
+}
+
+function playGame() {
+    
 }
 
 playGame();
