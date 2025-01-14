@@ -16,7 +16,6 @@ function computerTurn() {
     else {
         computerChoiceString = "scissors";
     }
-    console.log("The computer has selected " + computerChoiceString);
 }
 
 function humanTurn() {
@@ -108,3 +107,20 @@ function playGame() {
 }
 
 playGame();
+
+const selectionContainer = document.querySelector(".selection-container");
+
+selectionContainer.addEventListener("click", (e) => {
+    let target = e.target;
+    computerTurn();
+    if (target.id == "rock") {
+        playRound("rock", computerChoiceString);
+    }
+    else if (target.id == "paper") {
+        playRound("paper", computerChoiceString);
+    }
+    else {
+        playRound("scissors", computerChoiceString);
+    }
+    
+});
