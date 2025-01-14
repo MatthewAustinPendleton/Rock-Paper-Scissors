@@ -5,6 +5,11 @@ let computerChoiceString = "";
 let humanChoice;
 let humanChoiceString = "";
 
+const selectionContainer = document.querySelector(".selection-container");
+const message = document.querySelector(".message");
+const scoreMessage = document.querySelector(".score-message");
+const score = document.querySelector(".score");
+
 function computerTurn() {
     computerChoice = Math.floor(Math.random() * 3);
     if (computerChoice == 0) {
@@ -18,76 +23,64 @@ function computerTurn() {
     }
 }
 
-function humanTurn() {
-    humanChoice = prompt("Please enter a choice for your Rock-Paper-Scissors turn!");
-
-    if (humanChoice != "rock" && humanChoice != "ROCK" && humanChoice != "R" && humanChoice != "r" && 
-        humanChoice != "paper" && humanChoice != "PAPER" && humanChoice != "P" && humanChoice != "p" && 
-        humanChoice != "scissors" && humanChoice != "SCISSORS" && humanChoice != "S" && humanChoice != "s") {
-            console.log("Your input was invalid. Please try again!");
-            humanTurn();
-        }
-    else {
-        if (humanChoice == "rock" || humanChoice == "ROCK" || humanChoice == "R" || humanChoice == "r") {
-            humanChoiceString = "rock";
-        }
-        else if (humanChoice == "paper" || humanChoice == "PAPER" || humanChoice == "P" || humanChoice == "p") {
-            humanChoiceString = "paper";
-        }
-        else {
-            humanChoiceString = "scissors";
-        }
-        console.log("Your choice is " + humanChoiceString);
-    }
-}
-
 function playRound(humanChoiceString, computerChoiceString) {
     if (humanChoiceString == "rock") {
         if (computerChoiceString == "rock") {
-            console.log("You both selected rock and therefore ended up in a tie! No points awarded!");
+            message.textContent = "Player selects rock! Computer selects rock! Tie!";
+            scoreMessage.textContent = "Owing to a tie, no points are awarded!";
         }
         else if (computerChoiceString == "paper") {
             computerScore++;
-            console.log("Your rock was defeated by the computer's paper!");
-            console.log("The computer is awarded one point!");
+            message.textContent = "Player selects rock! Computer selects paper! Computer wins!";
+            scoreMessage.textContent = "Computer is awarded one point!";
         }
         else {
             humanScore++;
-            console.log("Your rock defeated the computer's scissors!");
-            console.log("You are awarded one point!");
+            message.textContent = "Player selects rock! Computer selects scissors! Human wins!";
+            scoreMessage.textContent = "Human is awarded one point!";
         } 
-    } // Rock selected
+    }
     else if (humanChoiceString == "paper") {
         if (computerChoiceString == "rock") {
             humanScore++;
-            console.log("Your paper defeated the computer's rock!");
-            console.log("You are awarded one point!");
+            message.textContent = "Player selects paper! Computer selects rock! Human wins!";
+            scoreMessage.textContent = "Human is awarded one point!";
         }
         else if (computerChoiceString == "paper") {
-            console.log("You both selected paper and therefore ended up in a tie! No points awarded!");
+            message.textContent = "Player selects paper! Computer selects paper! Tie!";
+            scoreMessage.textContent = "Owing to a tie, no points are awarded!";
         }
         else {
             computerScore++;
-            console.log("Your paper was defeated by the computer's scissors!");
-            console.log("The computer is awarded one point!");
+            message.textContent = "Player selects paper! Computer selects scissors! Computer wins!";
+            scoreMessage.textContent = "Computer is awarded one point!";
         }
-    } // Paper selected
+    }
     else {
         if (computerChoiceString == "rock") {
             computerScore++;
-            console.log("Your scissors were defeated by the computer's rock!");
-            console.log("The computer is awarded one point!");
+            message.textContent = "Player selects scissors! Computer selects rock! Computer wins!";
+            scoreMessage.textContent = "Computer is awarded one point!";
         }
         else if (computerChoiceString == "paper") {
             humanScore++;
-            console.log("Your scissors defeated the computer's paper!");
-            console.log("You are awarded one point!");
+            message.textContent = "Player selects scissors! Computer selects paper! Human wins!";
+            scoreMessage.textContent = "Human is awarded one point!";
         }
         else {
-            console.log("You both selected scissors and therefore ended up in a tie! No points awarded!");
+            message.textContent = "Player selects scissors! Computer selects scissors! Tie!";
+            scoreMessage.textContent = "Owing to a tie, no points are awarded!";
         }
     }
-    console.log("The round has ended! The player has " + humanScore + " points; the computer has " + computerScore + " points.");
+    score.textContent = "Score (Human " + humanScore + " / Computer " + computerScore + ")";
+    if (humanScore >= 5) {
+        alert("Human wins!");
+        location.reload();
+    }
+    if (computerScore >= 5) {
+        alert("Computer wins!");
+        location.reload();
+    }
 }
 
 function compareScores() {
@@ -101,14 +94,6 @@ function compareScores() {
         console.log("You and the computer have ended in a tie! Your final score is: " + humanScore);
     }
 }
-
-function playGame() {
-    
-}
-
-playGame();
-
-const selectionContainer = document.querySelector(".selection-container");
 
 selectionContainer.addEventListener("click", (e) => {
     let target = e.target;
@@ -124,3 +109,6 @@ selectionContainer.addEventListener("click", (e) => {
     }
     
 });
+
+
+
